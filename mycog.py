@@ -1,14 +1,15 @@
+import discord
 from redbot.core import commands
+import random
 
 class MyCog(commands.Cog):
     """My custom cog"""
 
     def __init__(self, bot):
         self.bot = bot
-        #Added Change here
 
     @commands.command()
-    async def mycom(self, ctx):
+    async def test(self, ctx):
         """This does stuff!"""
         # Your code will go here
         await ctx.send("I can do stuff!")
