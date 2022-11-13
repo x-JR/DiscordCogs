@@ -5,6 +5,7 @@ class MyCog(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        #Added Change here
 
     @commands.command()
     async def mycom(self, ctx):
