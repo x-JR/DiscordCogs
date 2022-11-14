@@ -1,7 +1,0 @@
-{
-    "author": ["Jake#1984 (467964879446212608)"],
-    "short": "My First Cog",
-    "description": "Cog to give user permissions to channel",
-    "name": "MyCog",
-    "install_msg": "Message Here - lol"
-}
