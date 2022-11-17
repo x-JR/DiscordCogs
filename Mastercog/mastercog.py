@@ -26,10 +26,14 @@ class MasterCog(commands.Cog):
         await ctx.send(f"{user} it's {current_time} and we're all still waiting...")
 
     @commands.command()
-    async def Test2(self, ctx,):
+    async def Test2(self, ctx, arg1):
         """Test Command"""
         msg = random.choice(await self.config.NoShowResponses())
-        await ctx.send(f"{msg}")        
+        current_time=time.strftime("%I:%M")
+        if "{user}" in msg and "{current_time}" in msg:
+            await ctx.send(msg.format(user=arg1, current_time=current_time))
+        else:
+            await ctx.send(msg)           
 
     @commands.command()
     async def Check(self, ctx,):
