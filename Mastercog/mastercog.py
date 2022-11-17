@@ -19,6 +19,6 @@ class MasterCog(commands.Cog):
         self.config.register_guild(**default_guild)
 
     @commands.command()
-    async def time(self, ctx):
+    async def noshow(self, ctx):
         """This does stuff!"""
         await ctx.send("It's currently", datetime.strftime(datetime.now, "%I:%M"), "and we're all still waiting..")
