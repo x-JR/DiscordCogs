@@ -1,7 +1,9 @@
 import discord
 from redbot.core import commands
 from redbot.core import Config
+from datetime import datetime
 import random
+
 
 class MasterCog(commands.Cog):
     """My custom cog"""
@@ -17,7 +19,6 @@ class MasterCog(commands.Cog):
         self.config.register_guild(**default_guild)
 
     @commands.command()
-    async def test(self, ctx):
+    async def time(self, ctx):
         """This does stuff!"""
-        # Your code will go here
-        await ctx.send("I can do stuff!")
+        await ctx.send("It's currently", datetime.strftime(datetime.now, "%I:%M", "and we're all still waiting.."))
