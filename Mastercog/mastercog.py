@@ -12,12 +12,12 @@ class MasterCog(commands.Cog):
         self.bot = bot
         self.config = Config.get_conf(self, identifier=467964879446212608, force_registration=True)
 
-        default_guild = {
+        default_global = {
             "Members": {},
             "NoShowResponses": ["{user} it's {current_time} and we're all still waiting..."]    
         }
 
-        self.config.register_guild(**default_guild)
+        self.config.register_guild(**default_global)
 
     @commands.command()
     async def noshow(self, ctx, user):
@@ -28,5 +28,5 @@ class MasterCog(commands.Cog):
     @commands.command()
     async def Test2(self, ctx,):
         """Test Command"""
-        msg = random.choice(await self.config.guild(ctx.guild).NoShowResponses())
+        msg = random.choice(await self.config.NoShowResponses())
         await ctx.send(f"{msg}")        
