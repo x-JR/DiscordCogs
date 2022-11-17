@@ -21,4 +21,4 @@ class MasterCog(commands.Cog):
     @commands.command()
     async def time(self, ctx):
         """This does stuff!"""
-        await ctx.send("It's currently", datetime.strftime(datetime.now, "%I:%M", "and we're all still waiting.."))
+        await ctx.send("It's currently", datetime.strftime(datetime.now, "%I:%M"), "and we're all still waiting..")
