@@ -10,7 +10,7 @@ class MasterCog(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.config = Config.get_conf(self, identifier=467964879446212608, force_registration=True)
+        self.config = Config.get_conf(self, identifier=467964879448)
 
         default_global = {
             "Members": {},
@@ -30,3 +30,9 @@ class MasterCog(commands.Cog):
         """Test Command"""
         msg = random.choice(await self.config.NoShowResponses())
         await ctx.send(f"{msg}")        
+
+    @commands.command()
+    async def Check(self, ctx,):
+        """Test Command"""
+        msg = await self.config.NoShowResponses()
+        await ctx.send(f"{msg}")                
