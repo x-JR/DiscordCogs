@@ -51,4 +51,9 @@ class MasterCog(commands.Cog):
                 await ctx.send("User removed")
             else:
                 members.append(member)
-                await ctx.send("User added")                   
+                await ctx.send("User added")  
+
+    @commands.Cog.listener()
+    async def on_message(self, ctx, message):
+        if message.author != self.bot and "12x23" in message.content:
+           await ctx.send("Listner worked?")
