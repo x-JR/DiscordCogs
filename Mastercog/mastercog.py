@@ -1,8 +1,8 @@
 import discord
+import random
+import time
 from redbot.core import commands
 from redbot.core import Config
-from datetime import datetime
-import random
 
 
 class MasterCog(commands.Cog):
@@ -21,4 +21,4 @@ class MasterCog(commands.Cog):
     @commands.command()
     async def noshow(self, ctx):
         """This does stuff!"""
-        await ctx.send("It's currently", datetime.strftime(datetime.now, "%I:%M"), "and we're all still waiting..")
+        await ctx.send("It's currently",time.strftime("%I:$M") ,"and we're all still waiting..")
