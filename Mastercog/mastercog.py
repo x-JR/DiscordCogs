@@ -13,7 +13,7 @@ class MasterCog(commands.Cog):
         self.config = Config.get_conf(self, identifier=467964879448)
 
         default_global = {
-            "Members": {},
+            "Members": [],
             "NoShowResponses": ["{user} it's {current_time} and we're all still waiting..."]    
         }
 
