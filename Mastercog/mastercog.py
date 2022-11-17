@@ -17,7 +17,7 @@ class MasterCog(commands.Cog):
             "NoShowResponses": ["{user} it's {current_time} and we're all still waiting..."]    
         }
 
-        self.config.register_guild(**default_global)
+        self.config.register_global(**default_global)
 
     @commands.command()
     async def noshow(self, ctx, user):
