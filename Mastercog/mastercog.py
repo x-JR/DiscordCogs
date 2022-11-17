@@ -13,13 +13,19 @@ class MasterCog(commands.Cog):
         self.config = Config.get_conf(self, identifier=467964879446212608, force_registration=True)
 
         default_guild = {
-            "Members": None,     
+            "Members": None,
+            "NoShowResponses": ["{user} it's {current_time} and we're all still waiting..."]    
         }
 
         self.config.register_guild(**default_guild)
 
     @commands.command()
-    async def noshow(self, ctx, arg1):
-        """This does stuff!"""
+    async def noshow(self, ctx, user):
+        """Calls out people who say they will be on at a certain time"""
         current_time = time.strftime("%I:%M")
-        await ctx.send(f"{arg1} it's {current_time} and we're all still waiting...")
+        await ctx.send(f"{user} it's {current_time} and we're all still waiting...")
+
+    @commands.command()
+    async def Test2(self, ctx,):
+        """Test Command"""
+        await ctx.send(f"Test2 Worked")        
