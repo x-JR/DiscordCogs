@@ -21,4 +21,5 @@ class MasterCog(commands.Cog):
     @commands.command()
     async def noshow(self, ctx):
         """This does stuff!"""
-        await ctx.send("It's currently",time.strftime("%I:$M") ,"and we're all still waiting..")
+        string = "It's currently", time.strftime("%I:$M") ,"and we're all still waiting.."
+        await ctx.send(string)
