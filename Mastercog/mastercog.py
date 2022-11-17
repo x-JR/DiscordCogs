@@ -59,4 +59,4 @@ class MasterCog(commands.Cog):
         if message.author == self.bot.user:
             return        
         if "1223" in message.content:
-           await channel.send("Listner worked?")
+           await channel.send("Listner worked?")   
