@@ -30,6 +30,7 @@ class MasterCog(commands.Cog):
             await ctx.send(msg)           
 
     @commands.command()
+    @commands.is_owner()
     async def noshow_add(self, ctx, response: str = None):
         """Adds response to list"""
         async with self.config.NoShowResponses() as responses:
@@ -39,3 +40,15 @@ class MasterCog(commands.Cog):
             else:
                 responses.append(response)
                 await ctx.send("Response added")              
+
+    @commands.command()
+    @commands.is_owner()
+    async def user_add(self, ctx, member):
+        """Adds response to list"""
+        async with self.config.Members() as members:
+            if member in members:
+                members.remove(member)
+                await ctx.send("User removed")
+            else:
+                members.append(member)
+                await ctx.send("User added")                   
