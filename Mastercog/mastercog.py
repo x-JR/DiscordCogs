@@ -6,7 +6,7 @@ from redbot.core import Config
 
 
 class MasterCog(commands.Cog):
-    """My custom cog"""
+    """Testing cog to learn Python"""
 
     def __init__(self, bot):
         self.bot = bot
