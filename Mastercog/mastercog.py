@@ -54,7 +54,9 @@ class MasterCog(commands.Cog):
                 await ctx.send("User added")  
 
     @commands.Cog.listener()
-    async def on_message(message):
+    async def on_message(self, message: discord.Message):
         channel = message.channel
-        if "12x23" in message.content:
+        if message.author == self.bot.user:
+            return        
+        if "1223" in message.content:
            await channel.send("Listner worked?")
