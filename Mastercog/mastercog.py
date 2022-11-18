@@ -54,11 +54,11 @@ class MasterCog(commands.Cog):
                 members.append(member)
                 await ctx.send("User added")  
 
-    # @commands.Cog.listener()
-    # async def on_message(self, message: discord.Message):
-    #     channel = message.channel
-    #     response = random.choice(await self.config.WallaceResponses())
-    #     if message.author == self.bot.user:
-    #         return        
-    #     if "wallace".casefold or "gromit".casefold in message.content:
-    #        await channel.send(response)
+    @commands.Cog.listener()
+    async def on_message(self, message: discord.Message):
+        channel = message.channel
+        response = random.choice(await self.config.WallaceResponses())
+        if message.author == self.bot.user:
+            return        
+        if "wallace" or "gromit" in message.content:
+           await channel.send(response)
