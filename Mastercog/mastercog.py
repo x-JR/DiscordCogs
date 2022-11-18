@@ -61,5 +61,5 @@ class MasterCog(commands.Cog):
         response = random.choice(await self.config.WallaceResponses())
         if message.author == self.bot.user:
             return        
-        if "wallace" or "gromit" in messagelowercase:
+        if "wallace" in messagelowercase:
            await channel.send(response)
