@@ -28,19 +28,7 @@ class MasterCog(commands.Cog):
         if "{user}" in msg and "{current_time}" in msg:
             await ctx.send(msg.format(user=user, current_time=current_time))
         else:
-            await ctx.send(msg)           
-
-    @commands.command()
-    @commands.is_owner()
-    async def noshow_add(self, ctx, response: str = None):
-        """Adds response to list"""
-        async with self.config.NoShowResponses() as responses:
-            if response in responses:
-                responses.remove(response)
-                await ctx.send("Response removed")
-            else:
-                responses.append(response)
-                await ctx.send("Response added")              
+            await ctx.send(msg)                       
 
     @commands.command()
     @commands.is_owner()
@@ -53,19 +41,7 @@ class MasterCog(commands.Cog):
             else:
                 members.append(member)
                 await ctx.send("User added")
-
-    @commands.command()
-    @commands.is_owner()
-    async def w_add(self, ctx, response):
-        """Adds response to list"""
-        async with self.config.WallaceResponses() as responses:
-            if response in responses:
-                responses.remove(response)
-                await ctx.send("Response removed")
-            else:
-                responses.append(response)
-                await ctx.send("Response added")                   
-
+                 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         channel = message.channel
