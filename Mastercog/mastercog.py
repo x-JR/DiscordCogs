@@ -3,7 +3,6 @@ import random
 import time
 from redbot.core import commands
 from redbot.core import Config
-client = discord.Client()
 
 class MasterCog(commands.Cog):
     """Testing cog to learn Python"""
@@ -49,7 +48,7 @@ class MasterCog(commands.Cog):
         """Checks whos available"""
         members = await self.config.Members()
         for member in members:
-            user = await client.fetch_user(member)
+            user = (int(member))
             await user.send("Hello there!")             
                  
     @commands.Cog.listener()
