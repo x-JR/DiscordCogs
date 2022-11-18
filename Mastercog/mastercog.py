@@ -57,8 +57,9 @@ class MasterCog(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         channel = message.channel
+        messagelowercase = message.content.casefold()
         response = random.choice(await self.config.WallaceResponses())
         if message.author == self.bot.user:
             return        
-        if "wallace" in message.content:
+        if "wallace" or "gromit" in messagelowercase:
            await channel.send(response)
