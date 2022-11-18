@@ -14,7 +14,8 @@ class MasterCog(commands.Cog):
 
         default_global = {
             "Members": [],
-            "NoShowResponses": ["{user} it's {current_time} and we're all still waiting..."]    
+            "NoShowResponses": ["{user} it's {current_time} and we're all still waiting..."],
+            "WallaceResponses" : ["That went as well as could be expected, didn't it?"]    
         }
 
         self.config.register_global(**default_global)
@@ -56,7 +57,8 @@ class MasterCog(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         channel = message.channel
+        response = random.choice(await self.config.WallaceResponses())
         if message.author == self.bot.user:
             return        
-        if "1223" in message.content:
-           await channel.send("Listner worked?")   
+        if "wallace".casefold or "gromit".casefold in message.content:
+           await channel.send(response)
