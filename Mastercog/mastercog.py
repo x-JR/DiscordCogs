@@ -57,8 +57,7 @@ class MasterCog(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         channel = message.channel
-        msg = discord.message
-        lmsg = msg.lower()
+        msg = str(discord.message).lower
         if message.author == self.bot.user:
             return        
         if "cheese" in discord.message:
