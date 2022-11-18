@@ -60,7 +60,7 @@ class MasterCog(commands.Cog):
         messagelowercase = message.content.casefold()
         if message.author == self.bot.user:
             return        
-        if "cheese" or ":cheese:" in messagelowercase:
+        if "cheese" in messagelowercase:
             response = random.choice(await self.config.WallaceResponses())
             await channel.send(response)
         if "wallace" in messagelowercase:
