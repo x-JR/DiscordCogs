@@ -49,7 +49,7 @@ class MasterCog(commands.Cog):
         """Checks whos available"""
         members = await self.config.Members()
         for member in members:
-            message = message or "This Message is sent via DM"
+            message = "This Message is sent via DM"
             await member.send(message)               
                  
     @commands.Cog.listener()
