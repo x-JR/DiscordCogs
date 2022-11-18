@@ -52,19 +52,26 @@ class MasterCog(commands.Cog):
                 await ctx.send("User removed")
             else:
                 members.append(member)
-                await ctx.send("User added")  
+                await ctx.send("User added")
+
+    @commands.command()
+    @commands.is_owner()
+    async def w_add(self, ctx, response):
+        """Adds response to list"""
+        async with self.config.WallaceResponses() as responses:
+            if response in responses:
+                responses.remove(response)
+                await ctx.send("Response removed")
+            else:
+                responses.append(response)
+                await ctx.send("Response added")                   
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         channel = message.channel
+        msg = message.content.lower()
         if message.author == self.bot.user:
             return        
-        if "cheese" in message.content.lower():
+        if "cheese" in msg or "wallace" in msg or "gromit" in msg or ":cheese:" in msg:
             response = random.choice(await self.config.WallaceResponses())
-            await channel.send(response)
-        if "wallace" in message.content.lower():
-            response = random.choice(await self.config.WallaceResponses())
-            await channel.send(response)      
-        if "gromit" in message.content.lower():
-            response = random.choice(await self.config.WallaceResponses())
-            await channel.send(response)                     
+            await channel.send(response)               
