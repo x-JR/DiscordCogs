@@ -59,6 +59,6 @@ class MasterCog(commands.Cog):
         channel = message.channel
         if message.author == self.bot.user:
             return        
-        if "cheese" in discord.message.lower() or "wallace" in discord.message.lower() or "gromit" in discord.message.lower():
+        if "cheese" in discord.message or "wallace" in discord.message or "gromit" in discord.message:
             response = random.choice(await self.config.WallaceResponses())
             await channel.send(response)
