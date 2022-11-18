@@ -41,6 +41,14 @@ class MasterCog(commands.Cog):
             else:
                 members.append(member)
                 await ctx.send("User added")
+
+
+    @commands.command()
+    @commands.is_owner()
+    async def ready(self, ctx, user: discord.user, message = None ):
+        """Checks whos available"""
+        message = message or "This Message is sent via DM"
+        await user.send(message)               
                  
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
