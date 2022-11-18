@@ -45,12 +45,12 @@ class MasterCog(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
-    async def ready(self, ctx,):
+    async def ready(self, ctx):
         """Checks whos available"""
         members = await self.config.Members()
         for member in members:
-            message = "This Message is sent via DM"
-            await member.send(message)               
+            user = await discord.client.fetch_user(member)
+            await user.send("Hello there!")             
                  
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
