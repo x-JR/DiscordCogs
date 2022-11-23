@@ -48,15 +48,18 @@ class MasterCog(commands.Cog):
         """Checks whos available"""
         members = await self.config.Members()
         for member in members:
-            user = await client.fetch_user(int("467964879446212608"))
+            user = await discord.client.fetch_user()
             await user.send("Hello there!")             
                  
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
+        triggers = ["cheese", "wallace", "gromit", ":cheese:", "audiobook", "wensleydale", "trousers", "moon"]
         channel = message.channel
         msg = message.content.lower()
         if message.author == self.bot.user:
-            return        
-        if "cheese" in msg or "wallace" in msg or "gromit" in msg or ":cheese:" in msg:
-            response = random.choice(await self.config.WallaceResponses())
-            await channel.send(response)               
+            return 
+        for trigger in triggers:           
+            if trigger in msg:
+                response = random.choice(await self.config.WallaceResponses())
+                await channel.send(response)
+                break               
