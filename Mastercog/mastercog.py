@@ -53,7 +53,7 @@ class MasterCog(commands.Cog):
                  
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
-        triggers = ["cheese", "wallace", "gromit", ":cheese:", "audiobook", "wensleydale", "trousers", "moon"]
+        triggers = ["cheese", "wallace", "gromit", "🧀", "audiobook", "wensleydale", "trousers", "moon"]
         channel = message.channel
         msg = message.content.lower()
         if message.author == self.bot.user:
