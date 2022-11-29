@@ -63,3 +63,13 @@ class MasterCog(commands.Cog):
                 response = random.choice(await self.config.WallaceResponses())
                 await channel.send(response)
                 break               
+
+
+    @commands.command()
+    @commands.is_owner()
+    async def mitch_chance(self, ctx, low = 1, high = 100):
+        """Calculates chances mitch will be online tonight"""
+        chance = random.randint(low, high)
+        await ctx.send("Calculation complete. {}% chance that mitch will be on tonight".format(chance))
+
+            
