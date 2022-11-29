@@ -66,7 +66,6 @@ class MasterCog(commands.Cog):
 
 
     @commands.command()
-    @commands.is_owner()
     async def mitch_chance(self, ctx, low = 1, high = 100):
         """Calculates chances mitch will be online tonight"""
         chance = random.randint(low, high)
