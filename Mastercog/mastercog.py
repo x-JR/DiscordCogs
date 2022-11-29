@@ -42,14 +42,14 @@ class MasterCog(commands.Cog):
                 await ctx.send("User added")
 
 
-    @commands.command()
-    @commands.is_owner()
-    async def ready(self, ctx):
-        """Checks whos available"""
-        members = await self.config.Members()
-        for member in members:
-            user = await discord.client.fetch_user()
-            await user.send("Hello there!")             
+    # @commands.command()
+    # @commands.is_owner()
+    # async def ready(self, ctx):
+    #     """Checks whos available"""
+    #     members = await self.config.Members()
+    #     for member in members:
+    #         user = await discord.client.fetch_user()
+    #         await user.send("Hello there!")             
                  
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
@@ -66,7 +66,7 @@ class MasterCog(commands.Cog):
 
 
     @commands.command()
-    async def mitch_chance(self, ctx, low = 1, high = 100):
+    async def mitch_chance(self, ctx, low = 0, high = 100):
         """Calculates chances mitch will be online tonight"""
         chance = random.randint(low, high)
         await ctx.send("Calculation complete. {}% chance that <@188811391610650624> will be on tonight".format(chance))
