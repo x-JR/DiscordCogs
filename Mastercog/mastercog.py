@@ -70,6 +70,6 @@ class MasterCog(commands.Cog):
     async def mitch_chance(self, ctx, low = 1, high = 100):
         """Calculates chances mitch will be online tonight"""
         chance = random.randint(low, high)
-        await ctx.send("Calculation complete. {}% chance that mitch will be on tonight".format(chance))
+        await ctx.send("Calculation complete. {}% chance that <@188811391610650624> will be on tonight".format(chance))
 
             
