@@ -53,22 +53,26 @@ class MasterCog(commands.Cog):
                  
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
-        triggers = ["cheese", "wallace", "gromit", "🧀", "audiobook", "wensleydale", "trousers", "moon"]
+        wallace_triggers = ["cheese", "wallace", "gromit", "🧀", "audiobook", "wensleydale", "trousers", "moon"]
         channel = message.channel
+        chance = random.randint(0, 100)
         msg = message.content.lower()
         if message.author == self.bot.user:
             return 
-        for trigger in triggers:           
+        for trigger in wallace_triggers:           
             if trigger in msg:
                 response = random.choice(await self.config.WallaceResponses())
                 await channel.send(response)
                 break               
-
-
-    @commands.command()
-    async def mitch_chance(self, ctx, low = 0, high = 100):
-        """Calculates chances mitch will be online tonight"""
-        chance = random.randint(low, high)
-        await ctx.send("Calculation complete. {}% chance that <@188811391610650624> will be on tonight".format(chance))
+        if "mitch" in msg and "chance" in msg:
+            await channel.send("{}% chance that <@188811391610650624> will be on tonight".format(chance))
+        if "mitch" in msg and "tonight" in msg:
+            await channel.send("{}% chance that <@188811391610650624> will be on tonight".format(chance))
+            
+    # @commands.command()
+    # async def mitch_chance(self, ctx, low = 0, high = 100):
+    #     """Calculates chances mitch will be online tonight"""
+    #     chance = random.randint(low, high)
+    #     await ctx.send("Calculation complete. {}% chance that <@188811391610650624> will be on tonight".format(chance))
 
             
