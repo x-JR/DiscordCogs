@@ -58,16 +58,15 @@ class MasterCog(commands.Cog):
         chance = random.randint(0, 100)
         msg = message.content.lower()
         if message.author == self.bot.user:
-            return 
+            return
+        elif "mitch" in msg and "chance" in msg:
+            await channel.send("{}% chance that <@188811391610650624> will be on tonight".format(chance))            
         for trigger in wallace_triggers:           
             if trigger in msg:
                 response = random.choice(await self.config.WallaceResponses())
                 await channel.send(response)
-                break               
-        if "mitch" in msg and "chance" in msg:
-            await channel.send("{}% chance that <@188811391610650624> will be on tonight".format(chance))
-        if "mitch" in msg and "tonight" in msg:
-            await channel.send("{}% chance that <@188811391610650624> will be on tonight".format(chance))
+                break 
+
             
     # @commands.command()
     # async def mitch_chance(self, ctx, low = 0, high = 100):
