@@ -62,7 +62,7 @@ class MasterCog(commands.Cog):
         elif "mitch" in msg and "chances" in msg:
             await channel.send("{}% chance that <@188811391610650624> will be on tonight".format(chance))
             return
-        elif "mitch" in msg and "tonight" in msg:
+        elif "mitch" in msg and "chance" in msg:
             await channel.send("{}% chance that <@188811391610650624> will be on tonight".format(chance))
             return             
         for trigger in wallace_triggers:           
