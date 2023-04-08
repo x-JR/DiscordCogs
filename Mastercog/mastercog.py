@@ -61,7 +61,7 @@ class MasterCog(commands.Cog):
             return
         elif "mitch" in msg and "chances" in msg:
             if message.author == "<@188811391610650624>":
-                await channel.send("100% chance that <@188811391610650624> will be online".format(chance))
+                await channel.send("100% chance that you will be online. dont ask again.".format(chance))
                 return
             else:
                 await channel.send("{}% chance that <@188811391610650624> will be online".format(chance))
