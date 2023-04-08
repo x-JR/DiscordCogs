@@ -53,17 +53,21 @@ class MasterCog(commands.Cog):
                  
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
-        wallace_triggers = ["cheese", "wallace", "gromit", "🧀", "audiobook", "wensleydale", "trousers", "moon"]
+        wallace_triggers = ["cheese", "wallace", "gromit", "🧀", "audiobook", "wensleydale", "trousers", "moon", "mutt"]
         channel = message.channel
         chance = random.randint(0, 100)
         msg = message.content.lower()
         if message.author == self.bot.user:
             return
         elif "mitch" in msg and "chances" in msg:
-            await channel.send("{}% chance that <@188811391610650624> will be on tonight".format(chance))
-            return
+            if message.author == "<@188811391610650624>":
+                await channel.send("100% chance that <@188811391610650624> will be online".format(chance))
+                return
+            else:
+                await channel.send("{}% chance that <@188811391610650624> will be online".format(chance))
+                return
         elif "mitch" in msg and "chance" in msg:
-            await channel.send("{}% chance that <@188811391610650624> will be on tonight".format(chance))
+            await channel.send("{}% chance that <@188811391610650624> will be online".format(chance))
             return             
         for trigger in wallace_triggers:           
             if trigger in msg:
