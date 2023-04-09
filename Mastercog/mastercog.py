@@ -44,7 +44,7 @@ class MasterCog(commands.Cog):
 
     @commands.command()
     @commands.is_owner()
-    async def test123(self, ctx, member, message: discord.Message):
+    async def test123(self, ctx, message: discord.Message):
         """Adds response to list"""
         ctx.send(message.author.name)                        
                  
