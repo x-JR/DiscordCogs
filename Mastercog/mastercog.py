@@ -39,17 +39,14 @@ class MasterCog(commands.Cog):
                 await ctx.send("User removed")
             else:
                 members.append(member)
-                await ctx.send("User added")
+                await ctx.send("User added")      
 
 
-    # @commands.command()
-    # @commands.is_owner()
-    # async def ready(self, ctx):
-    #     """Checks whos available"""
-    #     members = await self.config.Members()
-    #     for member in members:
-    #         user = await discord.client.fetch_user()
-    #         await user.send("Hello there!")             
+    @commands.command()
+    @commands.is_owner()
+    async def test123(self, ctx, member, message: discord.Message):
+        """Adds response to list"""
+        ctx.send(message.author.name)                        
                  
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
