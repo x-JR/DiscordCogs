@@ -39,14 +39,7 @@ class MasterCog(commands.Cog):
                 await ctx.send("User removed")
             else:
                 members.append(member)
-                await ctx.send("User added")      
-
-
-    @commands.command()
-    @commands.is_owner()
-    async def test123(self, ctx, message: discord.Message):
-        """Adds response to list"""
-        ctx.send(message.author.name)                        
+                await ctx.send("User added")                     
                  
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
@@ -58,6 +51,8 @@ class MasterCog(commands.Cog):
         msg = message.content.lower()
         if message.author == self.bot.user:
             return
+        elif message.content.startswith('$WhoAmI'):
+            await message.channel.send('You are', message.author.mention)
         elif "mitch" in msg and "chances" in msg:
             if message.author == "<@188811391610650624>" and triggered == 0:
                 await channel.send("100% chance that you will be online. dont ask again.")
