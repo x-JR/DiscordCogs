@@ -52,7 +52,8 @@ class MasterCog(commands.Cog):
         if message.author == self.bot.user:
             return
         elif message.content.startswith('$WhoAmI'):
-            await message.channel.send('You are', message.author.mention)
+            await channel.send('You are', message.author.mention)
+            return
         elif "mitch" in msg and "chances" in msg:
             if message.author == "<@188811391610650624>" and triggered == 0:
                 await channel.send("100% chance that you will be online. dont ask again.")
