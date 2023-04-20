@@ -59,11 +59,11 @@ class MasterCog(commands.Cog):
         if message.author == self.bot.user:
             return
         elif "mitch" in msg and "chances" in msg:
-            if message.author == "Droid#7487" and triggered == 0:
-                await channel.send("100% chance that you will be online. dont ask again.")
+            if str(message.author) == "Droid#7487" and triggered == 0:
+                await channel.send("100% chance that you will be online maggot. dont ask again.")
                 triggered = 1
                 return
-            elif message.author == "Droid#7487" and triggered == 1:
+            elif str(message.author) == "Droid#7487" and triggered == 1:
                 response = random.choice(wallace_angry)
                 await channel.send(response)
                 return
