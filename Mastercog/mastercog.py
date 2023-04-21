@@ -53,17 +53,12 @@ class MasterCog(commands.Cog):
         wallace_triggers = ["cheese", "wallace", "gromit", "🧀", "audiobook", "wensleydale", "trousers", "moon", "mutt"]
         wallace_angry = ["Gromit, grab the glock. 🔫", "Your starting to make me angry, mutt", "3000% chance of being online", "why do i need to tell you!?, you tell us!", "mess with the cheese, wallace going to give you the squeeze."]
         channel = message.channel
-        triggered = 0
         chance = random.randint(30, 100)
         msg = message.content.lower()
         if message.author == self.bot.user:
             return
         elif "mitch" in msg and "chances" in msg:
-            if str(message.author) == "Droid#7487" and triggered == 0:
-                await channel.send("100% chance that you will be online maggot. dont ask again.")
-                triggered = 1
-                return
-            elif str(message.author) == "Droid#7487" and triggered == 1:
+            if str(message.author) == "Droid#7487":
                 response = random.choice(wallace_angry)
                 await channel.send(response)
                 return
