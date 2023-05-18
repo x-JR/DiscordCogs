@@ -46,6 +46,6 @@ class ReadyChecker(commands.Cog):
         users = answers.keys()
         status = answers.values()
         message = ""
-        for i in len(users) - 1:
+        for i in range (0, len(users)):
             message += (f"{users[i]} : {status[i]} \n")
         await ctx.send(f"Current Status: \n {message}")        
