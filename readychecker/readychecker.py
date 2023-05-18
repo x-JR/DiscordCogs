@@ -54,7 +54,7 @@ class ReadyChecker(commands.Cog):
                             view = Confirm()
                             readymsg = await mem.send("Will you be ready tonight?", view=view)
                             dict[str(mem)] = readymsg
-                            await asyncio.sleep(30)
+                            #await asyncio.sleep(30)
                             if view.value == 'Ready':
                                 checklist.remove(str(mem))
                                 readyhomies.append(str(mem.name))
@@ -91,7 +91,7 @@ class ReadyChecker(commands.Cog):
                         except discord.errors.Forbidden:
                             pass                    
                     await message.edit(content=f"Debug: Attempts:{passes}. Currently: {mem}, Replied: {counted}")
-                elif passes >= 18:
+                elif passes < 18:
                     break
                 else:
                     pass
