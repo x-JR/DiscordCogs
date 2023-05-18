@@ -47,8 +47,8 @@ class Dropdown(discord.ui.Select):
         # the user's favourite colour or choice. The self object refers to the
         # Select object, and the values attribute gets a list of the user's
         # selected options. We only want the first one.
-        answers[str({interaction.user})] = str(self.values[0])
-        # await interaction.response.send_message(f"{interaction.user}'s favourite colour is {self.values[0]}")
+        await interaction.response.send_message(f"Set Status for tonight to: {self.values[0]}", ephemeral=True)
+        answers[str(interaction.user)] = str(self.values[0])
 
 class DropdownView(discord.ui.View):
     def __init__(self):
