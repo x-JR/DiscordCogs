@@ -56,18 +56,18 @@ class ReadyChecker(commands.Cog):
                             dict[str(mem)] = readymsg
                             await asyncio.sleep(30)
                             if view.value == 'Ready':
-                                checklist.remove(mem.name)
-                                readyhomies.append(mem.name)
+                                checklist.remove(str(mem))
+                                readyhomies.append(str(mem.name))
                                 counted.append(str(mem.name))
                                 await readymsg.edit(content=f"Thank you for responding, I have informed {ctx.message.author.name}", view=None)
                             elif view.value == 'Tentative':
-                                checklist.remove(mem.name)
-                                tentative.append(mem.name)
+                                checklist.remove(str(mem))
+                                tentative.append(str(mem.name))
                                 counted.append(str(mem.name))
                                 await readymsg.edit(content="Marked as tentative", view=None)
                             elif view.value == 'Ignore':
-                                checklist.remove(mem.name)
-                                ignored.append(mem.name)
+                                checklist.remove(str(mem))
+                                ignored.append(str(mem.name))
                                 counted.append(str(mem.name))
                                 await readymsg.edit(content="Ignored", view=None)    
 
@@ -79,16 +79,13 @@ class ReadyChecker(commands.Cog):
                             readymsg = dict.get(str(mem))
                             await asyncio.sleep(30)
                             if view.value == 'Ready':
-                                readyhomies.append(mem.name)
-                                counted.append(mem.name)
+                                readyhomies.append(str(mem.name))
                                 await readymsg.edit(content=f"Thank you for responding, I have informed {ctx.message.author.name}", view=None)
                             elif view.value == 'Tentative':
-                                tentative.append(mem.name)
-                                counted.append(mem.name)
+                                tentative.append(str(mem.name))
                                 await readymsg.edit(content="Marked as tentative", view=None)
                             elif view.value == 'Ignore':
-                                ignored.append(mem.name)
-                                counted.append(mem.name)
+                                ignored.append(str(mem.name))
                                 await readymsg.edit(content="Ignored", view=None)
 
                         except discord.errors.Forbidden:
