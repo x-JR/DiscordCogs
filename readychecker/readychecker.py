@@ -35,17 +35,20 @@ class ReadyChecker(commands.Cog):
         self.bot = bot
             
     @commands.command(description="Check if your homies are ready")
-    async def readycheck(self, ctx: commands.Context):
+    async def rc(self, ctx: commands.Context):
         """Check if your homies are ready"""
         view = DropdownView()
         await ctx.send('Ready-Check for Tonight:', view=view)
 
     @commands.command(description="Check if your homies are ready")
-    async def rcstatus(self, ctx: commands.Context):
+    async def status(self, ctx: commands.Context):
         """Check if your homies are ready / Global Test"""
         users = list(answers.keys())
         status = list(answers.values())
         message = ""
-        for i in range (0, len(users)):
-            message += (f"> {users[i]} : {status[i]} \n")
-        await ctx.send(f"Status Repliess: \n{message}")        
+        if users == None:
+            message = "No Replies Yet :'("
+        else:    
+            for i in range (0, len(users)):
+                message += (f"> {users[i]} : {status[i]} \n")
+            await ctx.send(f"Status Tonight: \n{message}")        
