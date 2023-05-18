@@ -56,15 +56,17 @@ class ReadyChecker(commands.Cog):
                             dict[str(mem)] = readymsg
                             await asyncio.sleep(30)
                             if view.value == 'Ready':
-                                checklist.remove(str(mem.name))
+                                checklist.remove(mem.name)
                                 readyhomies.append(mem.name)
                                 counted.append(str(mem.name))
                                 await readymsg.edit(content=f"Thank you for responding, I have informed {ctx.message.author.name}", view=None)
                             elif view.value == 'Tentative':
+                                checklist.remove(mem.name)
                                 tentative.append(mem.name)
                                 counted.append(str(mem.name))
                                 await readymsg.edit(content="Marked as tentative", view=None)
                             elif view.value == 'Ignore':
+                                checklist.remove(mem.name)
                                 ignored.append(mem.name)
                                 counted.append(str(mem.name))
                                 await readymsg.edit(content="Ignored", view=None)    
