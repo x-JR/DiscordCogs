@@ -25,6 +25,37 @@ class Confirm(discord.ui.View):
         self.value = 'Ignore'
         self.stop()        
 
+class Dropdown(discord.ui.Select):
+    def __init__(self):
+
+        # Set the options that will be presented inside the dropdown
+        options = [
+            discord.SelectOption(label='Red', description='Your favourite colour is red', emoji='🟥'),
+            discord.SelectOption(label='Green', description='Your favourite colour is green', emoji='🟩'),
+            discord.SelectOption(label='Blue', description='Your favourite colour is blue', emoji='🟦'),
+        ]
+
+        # The placeholder is what will be shown when no option is chosen
+        # The min and max values indicate we can only pick one of the three options
+        # The options parameter defines the dropdown options. We defined this above
+        super().__init__(placeholder='Choose your favourite colour...', min_values=1, max_values=1, options=options)
+
+    async def callback(self, interaction: discord.Interaction):
+        # Use the interaction object to send a response message containing
+        # the user's favourite colour or choice. The self object refers to the
+        # Select object, and the values attribute gets a list of the user's
+        # selected options. We only want the first one.
+        await interaction.response.send_message(f'Your favourite colour is {self.values[0]}')
+
+class DropdownView(discord.ui.View):
+    def __init__(self):
+        super().__init__()
+
+        # Adds the dropdown to our view object.
+        self.add_item(Dropdown())
+
+
+
 class ReadyChecker(commands.Cog):
     """Checks which homies are ready tonight"""
     def __init__(self, bot):
@@ -54,7 +85,7 @@ class ReadyChecker(commands.Cog):
                             view = Confirm()
                             readymsg = await mem.send("Will you be ready tonight?", view=view)
                             dict[str(mem)] = readymsg
-                            #await asyncio.sleep(30)
+                            await asyncio.sleep(30)
                             if view.value == 'Ready':
                                 checklist.remove(str(mem))
                                 readyhomies.append(str(mem.name))
@@ -99,3 +130,9 @@ class ReadyChecker(commands.Cog):
             await ctx.send(content=f"Nobody Replied :(")
         else:
             await ctx.send(content=f"On Tonight: {readyhomies} Undecided: {tentative} People who just ignored me: {checklist}")
+
+    @commands.command(description="Check if your homies are ready")
+    async def readycheck2(self, ctx: commands.Context):
+        """Check if your homies are ready / Global Test"""
+        view = DropdownView()
+        await ctx.send('Pick your favourite colour:', view=view)
