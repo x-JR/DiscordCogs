@@ -45,7 +45,9 @@ class ReadyChecker(commands.Cog):
             for mem in ctx.guild.members:
                 if mem.bot:
                     pass
-                elif str(mem) in checklist and str(mem) not in counted:
+                elif str(mem) not in checklist:
+                    pass
+                elif str(mem) not in counted:
                     passes += 1
                     if dict.get(str(mem), False) == False:
                         try:
@@ -88,7 +90,7 @@ class ReadyChecker(commands.Cog):
 
                         except discord.errors.Forbidden:
                             pass                    
-                    await message.edit(content=f"Checking if homies are ready: {passes}/{len(ctx.guild.members)}")
+                    await message.edit(content=f"Debug: Attempts:{passes}. Currently: {mem}, Replied: {counted}")
                 elif passes >= 400:
                     break
                 else:
