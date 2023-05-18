@@ -2,6 +2,8 @@ import discord
 from redbot.core import commands
 import asyncio
 
+answers = {}
+
 class Confirm(discord.ui.View):
     def __init__(self):
         super().__init__()
@@ -30,22 +32,23 @@ class Dropdown(discord.ui.Select):
 
         # Set the options that will be presented inside the dropdown
         options = [
-            discord.SelectOption(label='Red', description='Your favourite colour is red', emoji='🟥'),
-            discord.SelectOption(label='Green', description='Your favourite colour is green', emoji='🟩'),
-            discord.SelectOption(label='Blue', description='Your favourite colour is blue', emoji='🟦'),
+            discord.SelectOption(label='Available', description="You will be available tonight"),
+            discord.SelectOption(label='Tentative', description="Not Certain"),
+            discord.SelectOption(label='Unavailable', description='Unavailable Tonight'),
         ]
 
         # The placeholder is what will be shown when no option is chosen
         # The min and max values indicate we can only pick one of the three options
         # The options parameter defines the dropdown options. We defined this above
-        super().__init__(placeholder='Choose your favourite colour...', min_values=1, max_values=1, options=options)
+        super().__init__(placeholder='Will you be available tonight?', min_values=1, max_values=1, options=options)
 
     async def callback(self, interaction: discord.Interaction):
         # Use the interaction object to send a response message containing
         # the user's favourite colour or choice. The self object refers to the
         # Select object, and the values attribute gets a list of the user's
         # selected options. We only want the first one.
-        await interaction.response.send_message(f"{interaction.user}'s favourite colour is {self.values[0]}")
+        answers[str({interaction.user})] = str(self.values[0])
+        # await interaction.response.send_message(f"{interaction.user}'s favourite colour is {self.values[0]}")
 
 class DropdownView(discord.ui.View):
     def __init__(self):
@@ -136,3 +139,8 @@ class ReadyChecker(commands.Cog):
         """Check if your homies are ready / Global Test"""
         view = DropdownView()
         await ctx.send('Pick your favourite colour:', view=view)
+
+    @commands.command(description="Check if your homies are ready")
+    async def readycheckanswers(self, ctx: commands.Context):
+        """Check if your homies are ready / Global Test"""
+        await ctx.send(f"Current Status {answers}")        
