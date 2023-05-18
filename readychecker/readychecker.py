@@ -9,9 +9,9 @@ class Dropdown(discord.ui.Select):
 
         # Set the options that will be presented inside the dropdown
         options = [
-            discord.SelectOption(label='Available', description="You will be available tonight"),
-            discord.SelectOption(label='Tentative', description="Not Certain"),
-            discord.SelectOption(label='Unavailable', description='Unavailable Tonight'),
+            discord.SelectOption(label='Available', description="You will be available tonight", emoji='🟢'),
+            discord.SelectOption(label='Tentative', description="Not Certain", emoji='🤷‍♀️'),
+            discord.SelectOption(label='Unavailable', description='Unavailable Tonight', emoji='🔴'),
         ]
 
         # The placeholder is what will be shown when no option is chosen
