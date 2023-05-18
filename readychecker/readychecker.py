@@ -43,4 +43,4 @@ class ReadyChecker(commands.Cog):
     @commands.command(description="Check if your homies are ready")
     async def rcstatus(self, ctx: commands.Context):
         """Check if your homies are ready / Global Test"""
-        await ctx.send(f"Current Status {answers} `n Test")        
+        await ctx.send(f"Current Status: {answers[0]}")        
