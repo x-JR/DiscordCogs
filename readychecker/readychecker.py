@@ -56,16 +56,17 @@ class ReadyChecker(commands.Cog):
                             dict[str(mem)] = readymsg
                             await asyncio.sleep(30)
                             if view.value == 'Ready':
+                                checklist.remove(str(mem.name))
                                 readyhomies.append(mem.name)
-                                counted.append(mem.name)
+                                counted.append(str(mem.name))
                                 await readymsg.edit(content=f"Thank you for responding, I have informed {ctx.message.author.name}", view=None)
                             elif view.value == 'Tentative':
                                 tentative.append(mem.name)
-                                counted.append(mem.name)
+                                counted.append(str(mem.name))
                                 await readymsg.edit(content="Marked as tentative", view=None)
                             elif view.value == 'Ignore':
                                 ignored.append(mem.name)
-                                counted.append(mem.name)
+                                counted.append(str(mem.name))
                                 await readymsg.edit(content="Ignored", view=None)    
 
                         except discord.errors.Forbidden:
@@ -91,11 +92,11 @@ class ReadyChecker(commands.Cog):
                         except discord.errors.Forbidden:
                             pass                    
                     await message.edit(content=f"Debug: Attempts:{passes}. Currently: {mem}, Replied: {counted}")
-                elif passes >= 400:
+                elif passes >= 18:
                     break
                 else:
                     pass
         if readyhomies is None:
-            await ctx.send(content=f"Nobody Replied")
+            await ctx.send(content=f"Nobody Replied :(")
         else:
-            await ctx.send(content=f"On Tonight: {readyhomies} Undecided: {tentative}")
+            await ctx.send(content=f"On Tonight: {readyhomies} Undecided: {tentative} People who just ignored me: {checklist}")
