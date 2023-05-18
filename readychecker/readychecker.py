@@ -43,8 +43,8 @@ class ReadyChecker(commands.Cog):
     @commands.command(description="Check if your homies are ready")
     async def rcstatus(self, ctx: commands.Context):
         """Check if your homies are ready / Global Test"""
-        users = answers.keys()
-        status = answers.values()
+        users = list(answers.keys())
+        status = list(answers.values())
         message = ""
         for i in range (0, len(users)):
             message += (f"{users[i]} : {status[i]} \n")
