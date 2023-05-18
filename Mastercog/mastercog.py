@@ -9,7 +9,7 @@ class MasterCog(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.config = Config.get_conf(self, identifier=467964879448)
+        self.config = Config.get_conf(self, identifier=467964879448 force_registration=True)
 
         default_global = {
             "Members": [],

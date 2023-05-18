@@ -1,0 +1,99 @@
+import discord
+from redbot.core import commands
+import asyncio
+
+class Confirm(discord.ui.View):
+    def __init__(self):
+        super().__init__()
+        self.value = None
+
+    @discord.ui.button(label='Ready', style=discord.ButtonStyle.green)
+    async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message('Adding to Ready List.', ephemeral=True)
+        self.value = 'Ready'
+        self.stop()
+
+    @discord.ui.button(label='Tentative', style=discord.ButtonStyle.grey)
+    async def tentative(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message('Marking as Tentative.', ephemeral=True)
+        self.value = 'Tentative'
+        self.stop()
+
+    @discord.ui.button(label='Ignore', style=discord.ButtonStyle.red)
+    async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message('Ready Check Ignored.', ephemeral=True)
+        self.value = 'Ignore'
+        self.stop()        
+
+class ReadyChecker(commands.Cog):
+    """Checks which homies are ready tonight"""
+    def __init__(self, bot):
+        self.bot = bot
+            
+    @commands.command(description="Check if your homies are ready")
+    async def readycheck(self, ctx: commands.Context):
+        """Check if your homies are ready"""
+        checklist = ['Jake_#1984', 'Cizomic#3549', 'Aus_Nate#2990', 'kazster#4356', 'Dingleberry#8464', 'Droid#7487', 'Spitfyre#7256']
+        readyhomies = []
+        counted = []
+        tentative = []
+        ignored = []
+        dict = {}
+        passes = 0
+        message = await ctx.send("Initiating Ready Check")
+        while len(counted) != len(checklist):
+            for mem in ctx.guild.members:
+                if mem.bot:
+                    pass
+                elif str(mem) in checklist and str(mem) not in counted:
+                    passes += 1
+                    if dict.get(str(mem), False) == False:
+                        try:
+                            view = Confirm()
+                            readymsg = await mem.send("Will you be ready tonight?", view=view)
+                            dict[str(mem)] = readymsg
+                            await asyncio.sleep(30)
+                            if view.value == 'Ready':
+                                readyhomies.append(mem.name)
+                                counted.append(mem.name)
+                                await readymsg.edit(content=f"Thank you for responding, I have informed {ctx.message.author.name}", view=None)
+                            elif view.value == 'Tentative':
+                                tentative.append(mem.name)
+                                counted.append(mem.name)
+                                await readymsg.edit(content="Marked as tentative", view=None)
+                            elif view.value == 'Ignore':
+                                ignored.append(mem.name)
+                                counted.append(mem.name)
+                                await readymsg.edit(content="Ignored", view=None)    
+
+                        except discord.errors.Forbidden:
+                            pass
+                    else:
+                        try:    
+                            view = Confirm()
+                            readymsg = dict.get(str(mem))
+                            await asyncio.sleep(30)
+                            if view.value == 'Ready':
+                                readyhomies.append(mem.name)
+                                counted.append(mem.name)
+                                await readymsg.edit(content=f"Thank you for responding, I have informed {ctx.message.author.name}", view=None)
+                            elif view.value == 'Tentative':
+                                tentative.append(mem.name)
+                                counted.append(mem.name)
+                                await readymsg.edit(content="Marked as tentative", view=None)
+                            elif view.value == 'Ignore':
+                                ignored.append(mem.name)
+                                counted.append(mem.name)
+                                await readymsg.edit(content="Ignored", view=None)
+
+                        except discord.errors.Forbidden:
+                            pass                    
+                    await message.edit(content=f"Checking if homies are ready: {passes}/{len(ctx.guild.members)}")
+                elif passes >= 400:
+                    break
+                else:
+                    pass
+        if readyhomies is None:
+            await ctx.send(content=f"Nobody Replied")
+        else:
+            await ctx.send(content=f"On Tonight: {readyhomies} Undecided: {tentative}")
