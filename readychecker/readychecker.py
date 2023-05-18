@@ -46,9 +46,9 @@ class ReadyChecker(commands.Cog):
         users = list(answers.keys())
         status = list(answers.values())
         message = ""
-        if users == None:
-            message = "No Replies Yet :'("
-            await ctx.send(f"Status Tonight: \n{message}") 
+        empty = "No Responses Yet :("
+        if answers == None:
+            await ctx.send(f"Status Tonight: \n{empty}") 
         else:    
             for i in range (0, len(users)):
                 message = message + (f"> {users[i]} : {status[i]} \n")
