@@ -4,41 +4,33 @@ import asyncio
 
 answers = {}
 
-class Dropdown(discord.ui.Select):
+class PersistentView(discord.ui.View):
     def __init__(self):
+        super().__init__(timeout=None)
 
-        # Set the options that will be presented inside the dropdown
-        options = [
-            discord.SelectOption(label='Available', description="You will be available tonight", emoji='🟢'),
-            discord.SelectOption(label='Tentative', description="Not Certain", emoji='🤷‍♀️'),
-            discord.SelectOption(label='Unavailable', description='Unavailable Tonight', emoji='🔴'),
-        ]
+    @discord.ui.button(label='Online', style=discord.ButtonStyle.green, custom_id='persistent_view:green')
+    async def green(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message('This is green.', ephemeral=True)
 
-        # The placeholder is what will be shown when no option is chosen
-        # The min and max values indicate we can only pick one of the three options
-        # The options parameter defines the dropdown options. We defined this above
-        super().__init__(placeholder='Will you be available tonight?', min_values=1, max_values=1, options=options)
+    @discord.ui.button(label='Unsure', style=discord.ButtonStyle.red, custom_id='persistent_view:grey')
+    async def grey(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message('This is grey.', ephemeral=True)
 
-    async def callback(self, interaction: discord.Interaction):
-        await interaction.response.send_message(f"Set Status for tonight to: {self.values[0]}", ephemeral=True)
-        answers[str(interaction.user)] = str(self.values[0])
-
-class DropdownView(discord.ui.View):
-    def __init__(self):
-        super().__init__()
-        self.add_item(Dropdown())
-
+    @discord.ui.button(label='Unavailable', style=discord.ButtonStyle.grey, custom_id='persistent_view:red')
+    async def red(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_message('This is red.', ephemeral=True)        
 
 class ReadyChecker(commands.Cog):
     """Checks which boys are ready tonight"""
     def __init__(self, bot):
         self.bot = bot
+    async def setup_hook(self) -> None:
+        self.add_view(PersistentView())    
             
     @commands.command(description="Check if your homies are ready")
     async def rc(self, ctx: commands.Context):
         """Check if your homies are ready"""
-        view = DropdownView()
-        await ctx.send('Ready-Check for Tonight:', view=view)
+        await ctx.send('Ready-Check for Tonight:', view=PersistentView())
 
     @commands.command(description="Check if your homies are ready")
     async def status(self, ctx: commands.Context):
