@@ -10,15 +10,18 @@ class PersistentView(discord.ui.View):
 
     @discord.ui.button(label='Online', style=discord.ButtonStyle.green, custom_id='persistent_view:green')
     async def green(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message('This is green.', ephemeral=True)
+        await interaction.response.send_message('Marked as available.', ephemeral=True)
+        answers[str(interaction.user)] = "Online"    
 
     @discord.ui.button(label='Unsure', style=discord.ButtonStyle.red, custom_id='persistent_view:grey')
     async def grey(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message('This is grey.', ephemeral=True)
+        await interaction.response.send_message('Marked as Unsure.', ephemeral=True)
+        answers[str(interaction.user)] = "Unsure"    
 
     @discord.ui.button(label='Unavailable', style=discord.ButtonStyle.grey, custom_id='persistent_view:red')
     async def red(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message('This is red.', ephemeral=True)        
+        await interaction.response.send_message('Marked as unavailable tonight.', ephemeral=True) 
+        answers[str(interaction.user)] = "Unavailable"    
 
 class ReadyChecker(commands.Cog):
     """Checks which boys are ready tonight"""
