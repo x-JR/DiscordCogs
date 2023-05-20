@@ -33,7 +33,7 @@ class PersistentView(discord.ui.View):
         else:    
             for i in range (0, len(users)):
                 message = message + (f"> {status[i]} : {users[i]} \n")
-        await interaction.response.send_message(f"Status Tonight: \n{message}", ephemeral=True)           
+        await interaction.response.send_message(f"Availability Today: \n{message}", ephemeral=True)           
 
 class ReadyChecker(commands.Cog):
     """Checks which boys are ready tonight"""
@@ -56,8 +56,8 @@ class ReadyChecker(commands.Cog):
         message = ""
         empty = "No Responses Yet."
         if users is None:
-            await ctx.send(f"Status Tonight: \n{empty}") 
+            await ctx.send(f"Availability Today: \n{empty}") 
         else:    
             for i in range (0, len(users)):
                 message = message + (f"> {status[i]} : {users[i]} \n")
-            await ctx.send(f"Status Tonight: \n{message}")        
+            await ctx.send(f"Availability Today: \n{message}")        
