@@ -47,5 +47,5 @@ class ReadyChecker(commands.Cog):
             await ctx.send(f"Status Tonight: \n{empty}") 
         else:    
             for i in range (0, len(users)):
-                message = message + (f"> {users[i]} : {status[i]} \n")
+                message = message + (f"> {status[i]} : {users[i]} \n")
             await ctx.send(f"Status Tonight: \n{message}")        
