@@ -13,15 +13,27 @@ class PersistentView(discord.ui.View):
         await interaction.response.send_message('Marked as available.', ephemeral=True)
         answers[str(interaction.user)] = "Online 🟢"    
 
-    @discord.ui.button(label='Unsure', style=discord.ButtonStyle.red, custom_id='persistent_view:grey')
+    @discord.ui.button(label='Unsure', style=discord.ButtonStyle.grey, custom_id='persistent_view:grey')
     async def grey(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message('Marked as Unsure.', ephemeral=True)
         answers[str(interaction.user)] = "Unsure 🤷‍♀️"    
 
-    @discord.ui.button(label='Unavailable', style=discord.ButtonStyle.grey, custom_id='persistent_view:red')
+    @discord.ui.button(label='Unavailable', style=discord.ButtonStyle.red, custom_id='persistent_view:red')
     async def red(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message('Marked as unavailable tonight.', ephemeral=True) 
-        answers[str(interaction.user)] = "Unavailable 🔴"    
+        answers[str(interaction.user)] = "Unavailable 🔴"
+
+    @discord.ui.button(label='Whos Available?', style=discord.ButtonStyle.primary, custom_id='persistent_view:check')
+    async def red(self, interaction: discord.Interaction, button: discord.ui.Button):
+        users = list(answers.keys())
+        status = list(answers.values())
+        message = ""
+        if users is None:
+            message = "No Responses Yet."
+        else:    
+            for i in range (0, len(users)):
+                message = message + (f"> {status[i]} : {users[i]} \n")
+        await interaction.response.send_message(f"Status Tonight: \n{message}", ephemeral=True)           
 
 class ReadyChecker(commands.Cog):
     """Checks which boys are ready tonight"""
